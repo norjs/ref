@@ -1,0 +1,25 @@
+{
+  "name": "nor-ref",
+  "version": "0.1.0",
+  "description": "Reference parsing library",
+  "main": "src/ref.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sendanor/nor-ref.git"
+  },
+  "keywords": [
+    "url",
+    "parsing",
+    "reference",
+    "hypermedia"
+  ],
+  "author": "Jaakko-Heikki Heusala <jheusala@iki.fi>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sendanor/nor-ref/issues"
+  },
+  "homepage": "https://github.com/sendanor/nor-ref"
+}
