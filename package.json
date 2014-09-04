@@ -1,6 +1,6 @@
 {
   "name": "nor-ref",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reference parsing library",
   "main": "src/ref.js",
   "scripts": {
@@ -20,6 +20,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sendanor/nor-ref/issues"
+  },
+  "dependencies": {
+    "nor-array": ">= 0.1.4  < 0.2.0"
   },
   "homepage": "https://github.com/sendanor/nor-ref"
 }
