@@ -4,6 +4,7 @@
 
 var path = require('path');
 var ARRAY = require('nor-array');
+var FUNCTION = require('nor-function');
 
 /** Check if connection is HTTPS */
 function is_https(req) {
@@ -30,7 +31,7 @@ function format_arg(a) {
 function ref() {
 	var args = Array.prototype.slice.call(arguments);
 	var req = args.shift();
-	return get_proto(req) + ':/'+'/' + get_host(req) + path.resolve.apply(path.resolve, ARRAY(['/']).concat(args).map(format_arg).valueOf() );
+	return get_proto(req) + ':/'+'/' + get_host(req) + FUNCTION(path.resolve).apply(path.resolve, ARRAY(['/']).concat(args).map(format_arg).valueOf() );
 }
 
 // Exports
