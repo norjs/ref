@@ -28,13 +28,18 @@ function format_arg(a) {
 }
 
 /** Get ref */
-function ref() {
-	var args = Array.prototype.slice.call(arguments);
-	var req = args.shift();
-	return get_proto(req) + ':/'+'/' + get_host(req) + FUNCTION(path.resolve).apply(path.resolve, ARRAY(['/']).concat(args).map(format_arg).valueOf() );
-}
+function ref(base_path) {
+	var args2 = ['/'].concat(Array.prototype.slice.call(arguments));
+	return function _ref() {
+		var args = Array.prototype.slice.call(arguments);
+		var req = args.shift();
+		args = args2.concat(args);
+		return get_proto(req) + ':/'+'/' + get_host(req) + FUNCTION(path.resolve).apply(path.resolve, ARRAY([base_path]).concat(args).map(format_arg).valueOf() );
+	};
+};
 
 // Exports
-module.exports = ref;
+var _root_ref = module.exports = ref('/');
+_root_ref.withPath = ref;
 
 /* EOF */
