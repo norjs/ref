@@ -1,6 +1,6 @@
 {
   "name": "nor-ref",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reference parsing library",
   "main": "src/ref.js",
   "scripts": {
