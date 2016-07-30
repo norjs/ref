@@ -1,6 +1,6 @@
 {
   "name": "nor-ref",
-  "version": "0.1.6",
+  "version": "1.0.0",
   "description": "Reference parsing library",
   "main": "src/ref.js",
   "scripts": {
@@ -24,8 +24,8 @@
     "url": "https://github.com/sendanor/nor-ref/issues"
   },
   "dependencies": {
-    "nor-function": "^0.1.7",
-    "nor-array": "^0.1.8"
+    "nor-function": "^1.0.0",
+    "nor-array": "^1.0.0"
   },
   "devDependencies": {
     "lint"         : "^1.1.2",
