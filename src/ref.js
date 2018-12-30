@@ -4,11 +4,11 @@ import _ from 'lodash';
 import path from 'path';
 
 /** Check if connection is HTTPS
- * @param req
+ * @param req {object}
  * @return {boolean}
  */
 function is_https (req) {
-	if (req.headers && req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === 'https') {
+	if (req && req.headers && req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === 'https') {
 		return true;
 	}
 	return !!(req && req.connection && req.connection.encrypted);
@@ -23,11 +23,11 @@ function get_proto (req) {
 }
 
 /** Get hostname part of the url
- * @param req
- * @return {*}
+ * @param req {Object}
+ * @return {string|undefined}
  */
 function get_host (req) {
-	return req.headers ? req.headers.host : undefined;
+	return req && req.headers ? req.headers.host : undefined;
 }
 
 /**
@@ -40,26 +40,30 @@ function format_arg (a) {
 	return ''+a;
 }
 
-/** Get ref
+/** Build a reference function with a default base path.
  *
- * @param args
- * @return {function(...[*]=): string}
+ * @param base_path {string}
+ * @param args1 {Array.<*>>}
+ * @return {function(object, ...[*]=): string}
  */
-function ref (...args) {
-	const base_path = _.first(args);
-	const args2 = _.concat(['/'], args);
-	return ( ...args ) => {
-		const req = args.shift();
-		args = _.concat(args2, args);
-		const args3 = _.concat([base_path], args).map(format_arg);
-		return `${get_proto(req)}://${get_host(req)}${path.resolve(...args3)}`;
+function refFactory (base_path, ...args1) {
+	if (!_.isString(base_path)) throw new TypeError("base_path was not a string: " + base_path);
+	const args2 = _.concat(['/', base_path], args1);
+	return (req, ...args3 ) => {
+		if (!(req && _.isObject(req))) throw new TypeError("request was not an object: " + request);
+		const args4 = _.concat([], args2, args3).map(format_arg);
+		return `${get_proto(req)}://${get_host(req)}${path.resolve(...args4)}`;
 	};
 }
 
-// Exports
-let rootRef = ref('/');
-rootRef.withPath = ref;
+/**
+ * Reference function which takes Request object as first argument and optional suffix paths.
+ *
+ * @type {function(Object, ...[string]=): string}
+ */
+let ref = refFactory('/');
+ref.withPath = refFactory;
 
-export default rootRef;
+export default ref;
 
 /* EOF */
