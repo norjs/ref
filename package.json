@@ -1,6 +1,6 @@
 {
   "name": "@norjs/ref",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Reference parsing library",
   "main": "./dist/ref.js",
   "scripts": {
